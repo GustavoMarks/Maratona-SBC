@@ -5,12 +5,12 @@ Repositório para resolução de questões da Maratona SBC - Equipe Made in UFC
 <h3> Lista de questões </h3>
 
 <!-- Deixe um item na lista seguindo o formato:
- " - ano - [nome](link) - status (aberta, resolvida, resolvendo) - linguagem
+ " - ano, item - [nome](link) - status (aberta, resolvida, resolvendo) - linguagem
  Ponha o item em ordem decrescente de ano para ficar bonitinho e organizado
 -->
 
-  - 2017 - [Acordes Intergaláticos](https://www.urionlinejudge.com.br/judge/pt/problems/view/2658) - aberta
-  - 2015 - [Palíndromo](https://www.urionlinejudge.com.br/judge/pt/problems/origin/94) - aberta
+  - 2017, A - [Acordes Intergaláticos](https://www.urionlinejudge.com.br/judge/pt/problems/view/2658) - aberta
+  - 2015, K - [Palíndromo](https://www.urionlinejudge.com.br/judge/pt/problems/view/1941) - aberta
 
 <h3> Índices de resolução </h3>
 
