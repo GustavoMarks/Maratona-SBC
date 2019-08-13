@@ -9,7 +9,7 @@ public:
     int origem;
     int destino;
     int peso;
-    Aresta *prox;
+    Aresta *prox; //para a list de adj
 
     Aresta(int origem, int destino, int peso);
     int GetPeso();
@@ -20,7 +20,7 @@ Aresta::Aresta(int origem, int destino, int peso){
     this->origem = origem;
     this->destino = destino;
     this->peso = peso;
-    this->prox = 0; // 0
+    this->prox = nullptr;
 }
 int Aresta::GetPeso(){
     return this->peso;
@@ -66,10 +66,9 @@ int Vertice::GetPai(){
 
 class Grafo{
 public:
-    int v;
-    Aresta **adj;
-    vector<Vertice> vert;
-
+    int v; //numero de vertices
+    Aresta **adj; //lista de adjacencias
+    vector<Vertice> vert; //vetor com os vertices, e propriedades que serao usadas no dfs
 
     Grafo(int v);
     void adicionarAresta(Aresta *e);
@@ -79,13 +78,8 @@ Grafo::Grafo(int v){
     this->v = v;
     this->adj = new(nothrow) Aresta*[v];
     for(int i = 0; i < v; i++){
-        this->adj[i] = 0; // 0
+        this->adj[i] = nullptr;
     }
-    for (int i = 0; i < this->v; i++){
-        //Vertice *vertex = new Vertice("branco", NULL);
-        this->vert.push_back(Vertice("branco", NULL));
-    }
-
 }
 void Grafo::adicionarAresta(Aresta *e){
     e->prox = this->adj[e->GetOrigem() - 1];
@@ -96,7 +90,7 @@ void Grafo::imprimirGrafo(){
     {
         Aresta *p = this->adj[i];
         cout << "index: " << i << endl;
-        while (p != 0) //0
+        while (p != nullptr)
         {
             cout << p->GetOrigem() << endl;
             cout << p->GetDestino() << endl;
@@ -110,7 +104,7 @@ void Grafo::imprimirGrafo(){
 
 int *pImpCidades;
 
-int *p_C;
+int CapaciCarga;
 
 int contadorFinal = 0;
 
@@ -122,7 +116,7 @@ void DFSvisita(Grafo *g, int index, int pesoAresta_pai){
     g->vert[index].d = tempo;
 
     Aresta *e = g->adj[index];
-    while(e != 0){
+    while(e != nullptr){
         if(g->vert[e->GetDestino() - 1].GetCor() == "branco"){
             g->vert[e->GetDestino() -1].SetPai(index);
             contadorFinal += e->GetPeso();
@@ -135,26 +129,27 @@ void DFSvisita(Grafo *g, int index, int pesoAresta_pai){
     g->vert[index].f = tempo;
 
     bool teste = true;
-    while(teste){
-
-        if(pImpCidades[index] - *p_C <= 0){
+    while(teste && index != 0){
+        if(pImpCidades[index] - CapaciCarga <= 0){
             pImpCidades[g->vert[index].GetPai()] += pImpCidades[index];
             pImpCidades[index] = 0;
             contadorFinal += pesoAresta_pai;
             teste = false;
         }
         else{
-            pImpCidades[index] = pImpCidades[index] - *p_C;
-            pImpCidades[g->vert[index].GetPai()] += *p_C;
+            pImpCidades[index] = pImpCidades[index] - CapaciCarga;
+            pImpCidades[g->vert[index].GetPai()] += CapaciCarga;
             contadorFinal += 2*pesoAresta_pai;
         }
+    }
+}
 
+int DFS(Grafo *g){
+    for (int i = 0; i < g->v; i++){
+        g->vert.push_back(Vertice("branco", NULL));
     }
 
-}
-int DFS(Grafo *g){
     int index = 0;
-
     for (vector<Vertice>::iterator i = g->vert.begin(); i != g->vert.end(); i++, index++){
         if(i->cor == "branco"){
             DFSvisita(g, index, 0);
@@ -163,25 +158,24 @@ int DFS(Grafo *g){
 }
 
 
-
-
 int main(){
     int N, C;
     cin >> N >> C;
 
-    p_C = &C;
+    CapaciCarga = C; //variavel global para ser udada no dfs
 
+    //vetor com os impostos das cidades
     int ImpCidades[N];
     for(int i = 0; i < N; i++)
     {
         cin >> ImpCidades[i];
     }
-    pImpCidades = ImpCidades;
-
+    pImpCidades = ImpCidades; //ponteiro global apontando para o vetor
 
 
     Grafo *g = new Grafo(N);
 
+    //criando as arestas do grafo
     for (int  i = 0; i < N - 1; i++)
     {
         int A, B, C;
@@ -192,6 +186,7 @@ int main(){
         g->adicionarAresta(arestaVolta);
     }
 
+    //chamada do dfs, onde vai ocorrer o calculo do percuso
     DFS(g);
 
     //g->imprimirGrafo();
