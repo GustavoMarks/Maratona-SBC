@@ -1,13 +1,9 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
 
-int main(){
-    string s1,s2;
-    cin >> s1;
-    cin >> s2;
-
+int fun(string s1, string s2){
+    
     int ultimoIndexs1 = s1.length();
     int ultimoIndexs2 = s2.length();
     int resultado = 0;
@@ -23,6 +19,7 @@ int main(){
         }
         if(teste){
             resultado++;
+            return resultado;
         }
     }
 
@@ -45,6 +42,16 @@ int main(){
         ind++;
         ultimoIndexs2++;
     }
+    return resultado;
+}
+
+
+int main(){
+    string s1,s2;
+    cin >> s1;
+    cin >> s2;
+    
+    int resultado = fun(s1, s2);
 
     cout << resultado << endl;
     return 0;
