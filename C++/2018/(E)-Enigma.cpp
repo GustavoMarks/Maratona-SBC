@@ -2,39 +2,28 @@
 #include <string>
 using namespace std;
 
-int fun(string s1, string s2){
+int main(){
+    string s1,s2;
+    cin >> s1;
+    cin >> s2;
     
     int ultimoIndexs1 = s1.length();
     int ultimoIndexs2 = s2.length();
     int resultado = 0;
     bool teste = true;
 
-    //caso em que o tamanho das strings sao iguais
-    if(ultimoIndexs2 == ultimoIndexs1){
-        for(int i = 0; i < s1.length(); i++){
-            if(s1[i] == s2[i]){
-                teste = false;
-                break;
-            }
-        }
-        if(teste){
-            resultado++;
-            return resultado;
-        }
-    }
-
-    //caso em que o tamanho das strings sao diferentes
-    int ind = 0;
-    int ind2;
+    int ind = 0; 
+    int indvetor;
     while (ultimoIndexs2 <= ultimoIndexs1){
-        ind2 = 0;
+        indvetor = 0; //indice para posicao no vetor
         teste = true;
-        for(int i = ind ; i < ultimoIndexs2; i++){
-            if(s1[i] == s2[ind2]){
+        //deslocando os indices na string1 para a comparacao com a string2
+        for(int i = ind ; i < ultimoIndexs2; i++){ 
+            if(s1[i] == s2[indvetor]){
                 teste = false;
                 break;
             }
-            ind2++;
+            indvetor++;
         }
         if(teste){
             resultado++;
@@ -42,16 +31,6 @@ int fun(string s1, string s2){
         ind++;
         ultimoIndexs2++;
     }
-    return resultado;
-}
-
-
-int main(){
-    string s1,s2;
-    cin >> s1;
-    cin >> s2;
-    
-    int resultado = fun(s1, s2);
 
     cout << resultado << endl;
     return 0;

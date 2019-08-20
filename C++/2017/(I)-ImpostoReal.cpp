@@ -33,6 +33,7 @@ int Aresta::GetDestino(){
 }
 
 
+//contem os campos para a execucao do dfs
 class Vertice{
 public:
     string cor;
@@ -75,17 +76,25 @@ public:
     void imprimirGrafo();
 };
 Grafo::Grafo(int v){
-    this->v = v;
-    this->adj = new(nothrow) Aresta*[v];
+    this->v = v; //setando o numero de vertices
+    this->adj = new(nothrow) Aresta*[v]; //criando a lista de adjacencias
+    //apontando para nullo todos os ponteiros da lista de adj 
     for(int i = 0; i < v; i++){
         this->adj[i] = nullptr;
     }
 }
 void Grafo::adicionarAresta(Aresta *e){
+    //ponteiro do 'noh' aresta apontando para onde o ponteiro na lista esta apontando
     e->prox = this->adj[e->GetOrigem() - 1];
+    //ponteiro da lista apontando para a aresta
     this->adj[e->GetOrigem() - 1] = e;
+
+    /*IMPORTANTE: Na questao os vertice comecam de 1 ate n, mas como os indices dos vetores
+    comecam em 0, foi decidido subtrair 1 das entradas dos vertice para relacionar os indices dos
+    vetores com os vertices*/
 }
-void Grafo::imprimirGrafo(){
+//metodo para exibir a lista de adjacencias 
+void Grafo::imprimirGrafo(){ 
     for (int i = 0; i < this->v; i++)
     {
         Aresta *p = this->adj[i];
@@ -101,42 +110,47 @@ void Grafo::imprimirGrafo(){
     }
 }
 
-
+//variaveis globais usadas no dfs
 int *pImpCidades;
-
 int CapaciCarga;
-
 int contadorFinal = 0;
-
 int tempo = 0;
 
+//DFSvisita recebe o grafo, o vertice, e o peso da aresta que incide no pai
 void DFSvisita(Grafo *g, int index, int pesoAresta_pai){
     g->vert[index].SetCor("cinza");
     tempo = tempo + 1;
     g->vert[index].d = tempo;
 
+    //visitando as adjacencias do vertice na lista
     Aresta *e = g->adj[index];
     while(e != nullptr){
+        /* se o vertice vizinho for branco, vou visitalo setando o seu pai
+        e somando o peso da aresta percorrida */
         if(g->vert[e->GetDestino() - 1].GetCor() == "branco"){
             g->vert[e->GetDestino() -1].SetPai(index);
             contadorFinal += e->GetPeso();
             DFSvisita(g, e->GetDestino() - 1, e->GetPeso());
         }
-        e = e->prox;
+        e = e->prox; //passando para o proximo vizinho
     }
     g->vert[index].SetCor("preto");
     tempo = tempo + 1;
     g->vert[index].f = tempo;
 
+    //contagem do caminho percorrido para a arrecadacao de todo o dinheiro
     bool teste = true;
     while(teste && index != 0){
-        if(pImpCidades[index] - CapaciCarga <= 0){
+
+        /* se o dinheiro a ser arrecadado for menor ou igual a carga, 
+        soh preciso colocar o dinheiro no cofre do pai e somar o percurso de volta */  
+        if(pImpCidades[index] <= CapaciCarga){
             pImpCidades[g->vert[index].GetPai()] += pImpCidades[index];
             pImpCidades[index] = 0;
             contadorFinal += pesoAresta_pai;
             teste = false;
         }
-        else{
+        else{ // senao, preciso pegar tudo que posso, deixar no cofre do pai e voltar enquanto nao quitar, somando o percurso
             pImpCidades[index] = pImpCidades[index] - CapaciCarga;
             pImpCidades[g->vert[index].GetPai()] += CapaciCarga;
             contadorFinal += 2*pesoAresta_pai;
@@ -145,11 +159,13 @@ void DFSvisita(Grafo *g, int index, int pesoAresta_pai){
 }
 
 int DFS(Grafo *g){
+    //inicilizacao do dfs
     for (int i = 0; i < g->v; i++){
         g->vert.push_back(Vertice("branco", NULL));
     }
 
-    int index = 0;
+    //visitando todos os vertices brancos
+    int index = 0; //o indice do vetor eh o vertice
     for (vector<Vertice>::iterator i = g->vert.begin(); i != g->vert.end(); i++, index++){
         if(i->cor == "branco"){
             DFSvisita(g, index, 0);
@@ -175,14 +191,15 @@ int main(){
 
     Grafo *g = new Grafo(N);
 
-    //criando as arestas do grafo
     for (int  i = 0; i < N - 1; i++)
     {
         int A, B, C;
         cin >> A >> B >> C;
+
+        //criando as arestas do grafo
         Aresta *arestaIda = new Aresta(A, B, C);
         g->adicionarAresta(arestaIda);
-        Aresta *arestaVolta = new Aresta(B, A, C);
+        Aresta *arestaVolta = new Aresta(B, A, C); //o grafo nao eh direcionado, logo preciso setar a aresta de volta
         g->adicionarAresta(arestaVolta);
     }
 
@@ -192,7 +209,5 @@ int main(){
     //g->imprimirGrafo();
 
     cout << contadorFinal << endl;
-
-
 
 }

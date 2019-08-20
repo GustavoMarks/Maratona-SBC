@@ -12,7 +12,7 @@ Repositório para resolução de questões da Maratona SBC - Equipe Made in UFC
   - 2018, D - [Desvendando Monty Hall](https://www.urionlinejudge.com.br/judge/pt/problems/view/2879) - Accepted ✅ - C++
   - 2018, E - [Enigma](https://www.urionlinejudge.com.br/judge/pt/problems/view/2880) - Accepted ✅ - C++
   - 2017, A - [Acordes Intergaláticos](https://www.urionlinejudge.com.br/judge/pt/problems/view/2658) - Aberta ⭕
-  - 2017, F - [Fase](https://www.urionlinejudge.com.br/judge/pt/problems/view/2663) - Wrong answer (5%) ❌ - C++
+  - 2017, F - [Fase](https://www.urionlinejudge.com.br/judge/pt/problems/view/2663) - Accepted ✅ - C++
   - 2017, I - [Imposto Real](https://www.urionlinejudge.com.br/judge/pt/problems/view/2666) - Accepted ✅ - C++
   - 2017, M - [Máquina de Café](https://www.urionlinejudge.com.br/judge/pt/problems/view/2670) - Accepted ✅ - C++
   - 2016, A - [Andando No Tempo](https://www.urionlinejudge.com.br/judge/pt/problems/view/2235) - Accepted ✅ - C++
