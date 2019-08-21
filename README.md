@@ -16,6 +16,7 @@ Repositório para resolução de questões da Maratona SBC - Equipe Made in UFC
   - 2017, I - [Imposto Real](https://www.urionlinejudge.com.br/judge/pt/problems/view/2666) - Accepted ✅ - C++
   - 2017, M - [Máquina de Café](https://www.urionlinejudge.com.br/judge/pt/problems/view/2670) - Accepted ✅ - C++
   - 2016, A - [Andando No Tempo](https://www.urionlinejudge.com.br/judge/pt/problems/view/2235) - Accepted ✅ - C++
+  - 2016, H - [Huaauhahhuahau](https://www.urionlinejudge.com.br/judge/pt/problems/view/2242) - Accepted ✅ - C++
   - 2015, K - [Palíndromo](https://www.urionlinejudge.com.br/judge/pt/problems/view/1941) - Aberta ⭕
 
 <h3> Índices de resolução </h3>
