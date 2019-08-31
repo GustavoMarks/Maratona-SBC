@@ -22,6 +22,16 @@ Wrong answer (10%) ❌ - C++
   - 2016, H - [Huaauhahhuahau](https://www.urionlinejudge.com.br/judge/pt/problems/view/2242) - Accepted ✅ - C++
   - 2015, K - [Palíndromo](https://www.urionlinejudge.com.br/judge/pt/problems/view/1941) - Aberta ⭕
 
+<h3>Algoritmos </h3>
+
+  - Ordenação:
+    - [MergeSort](https://github.com/GustavoM7/Maratona-SBC/blob/master/C%2B%2B/Algoritmos/Ordena%C3%A7%C3%A3o/Mergesort.hpp)
+    - [QuickSort](https://github.com/GustavoM7/Maratona-SBC/blob/master/C%2B%2B/Algoritmos/Ordena%C3%A7%C3%A3o/Quicksort.hpp)
+
+  - Busca Em Grafos
+    - [DFS](https://github.com/GustavoM7/Maratona-SBC/blob/master/C%2B%2B/Algoritmos/BuscaEmGrafo/DFS.hpp)
+    - [BFS]
+
 <h3> Índices de resolução </h3>
 
 <table>
